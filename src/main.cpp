@@ -50,6 +50,7 @@ void check_files(ifstream& in_file, string& in_name,
 }
 
 int main(int argc, char* argv[]) {
+  cout << "Brian Erickson's Project" << endl;
 
   check_arguments(argc, argv);
 

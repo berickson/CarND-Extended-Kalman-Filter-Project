@@ -4,10 +4,23 @@
     "version": "0.1.0",
     "command": "make",
     "cwd": "",
-      "options": {
-            "cwd": "${workspaceRoot}/build"
-        },
+    "options": {
+        "cwd": "${workspaceRoot}/build"
+    },
     "isShellCommand": true,
     "args": [],
-    "showOutput": "always"
+    "showOutput": "always",
+    "problemMatcher": {
+        "owner": "cpp",
+        //"fileLocation": ["relative", "${workspaceRoot}"],
+        "fileLocation": ["absolute"],
+        "pattern": {
+            "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "severity": 4,
+            "message": 5
+        }
+    }
 }

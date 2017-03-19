@@ -5,4 +5,7 @@
 build/
 
 # editor config
-.vscode/
+#.vscode/
+
+# notebook temp
+.ipynb_checkpoints

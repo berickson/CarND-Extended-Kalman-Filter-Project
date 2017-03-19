@@ -1,3 +1,4 @@
+predicted_x	predicted_y	predicted_ax	predicted_ay	measured_x	measured_y	actual_x	actual_y	actual_ax	actual_ay
 8.46292	0.243462	0	0	8.46292	0.243462	8.6	0.25	-3.00029	0
 8.44827	0.251501	-0.209221	0.114847	8.44818	0.251553	8.45	0.25	-3.00027	0
 8.4378	0.25725	-0.209221	0.114847	8.56759	0.241943	8.45	0.25	0	0

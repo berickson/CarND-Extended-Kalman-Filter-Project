@@ -132,6 +132,7 @@ int main(int argc, char* argv[]) {
   vector<VectorXd> estimations;
   vector<VectorXd> ground_truth;
 
+  out_file_ << "predicted_x\tpredicted_y\tpredicted_ax\tpredicted_ay\tmeasured_x\tmeasured_y\tactual_x\tactual_y\tactual_ax\tactual_ay"<<endl;
   //Call the EKF-based fusion
   size_t N = measurement_pack_list.size();
   for (size_t k = 0; k < N; ++k) {

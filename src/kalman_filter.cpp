@@ -19,7 +19,7 @@ void KalmanFilter::Init(VectorXd &x_in, MatrixXd &P_in, MatrixXd &F_in,
 
 void KalmanFilter::Predict() {
   /**
-  TODO:
+  DONE:
     * predict the state
   */
 
@@ -29,7 +29,7 @@ void KalmanFilter::Predict() {
 
 void KalmanFilter::Update(const VectorXd &z) {
   /**
-  TODO:
+  DONE:
     * update the state by using Kalman Filter equations
   */
   MatrixXd I;

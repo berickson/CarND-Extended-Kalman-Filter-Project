@@ -42,8 +42,38 @@ void KalmanFilter::Update(const VectorXd &z) {
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
+  //Update(z);
   /**
   TODO:
     * update the state by using Extended Kalman Filter equations
   */
+  MatrixXd I;
+  I.setIdentity(P_.rows(), P_.cols());
+
+  // map state space to measure space (lesson segment 19)
+  auto px = x_(0);
+  auto py = x_(1);
+  auto vx = x_(2);
+  auto vy = x_(3);
+
+  auto hx = VectorXd(3);
+  auto r =  sqrt(px*px+py*py);
+  hx[0] =r;
+  hx[1] = atan2(py,px);
+  hx[2] = (px*vx+py*vy)/r;
+
+  VectorXd y = z - hx;
+
+  // normalize angle between -pi and pi
+  while(y(1)>M_PI) {
+    y(1) = y(1) - 2 * M_PI;
+  }
+  while(y(1)<-M_PI) {
+    y(1) = y(1) + 2 * M_PI;
+  }
+  MatrixXd S = H_ * P_ * H_.transpose() + R_;
+  MatrixXd K = P_ * H_.transpose() * S.inverse();
+  x_ = x_ + K * y;
+  P_ = (I-K*H_)*P_;
+
 }

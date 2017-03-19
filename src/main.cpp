@@ -132,7 +132,7 @@ int main(int argc, char* argv[]) {
   vector<VectorXd> estimations;
   vector<VectorXd> ground_truth;
 
-  out_file_ << "predicted_x\tpredicted_y\tpredicted_ax\tpredicted_ay\tmeasured_x\tmeasured_y\tactual_x\tactual_y\tactual_ax\tactual_ay"<<endl;
+  out_file_ << "predicted_x\tpredicted_y\tpredicted_vx\tpredicted_vy\tmeasured_x\tmeasured_y\tmeasured_vx\tmeasured_vy\tactual_x\tactual_y\tactual_vx\tactual_vy"<<endl;
   //Call the EKF-based fusion
   size_t N = measurement_pack_list.size();
   for (size_t k = 0; k < N; ++k) {
@@ -151,12 +151,16 @@ int main(int argc, char* argv[]) {
       // output the estimation
       out_file_ << measurement_pack_list[k].raw_measurements_(0) << "\t";
       out_file_ << measurement_pack_list[k].raw_measurements_(1) << "\t";
+      out_file_ << "0\t0\t"; // no estimates for vx or vy
     } else if (measurement_pack_list[k].sensor_type_ == MeasurementPackage::RADAR) {
       // output the estimation in the cartesian coordinates
       float ro = measurement_pack_list[k].raw_measurements_(0);
       float phi = measurement_pack_list[k].raw_measurements_(1);
+      float v = measurement_pack_list[k].raw_measurements_(2);
       out_file_ << ro * cos(phi) << "\t"; // p1_meas
       out_file_ << ro * sin(phi) << "\t"; // ps_meas
+      out_file_ << v * cos(phi) << "\t"; // p1_meas
+      out_file_ << v * sin(phi) << "\t"; // ps_meas
     }
 
     // output the ground truth packages

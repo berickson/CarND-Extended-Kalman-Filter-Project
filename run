@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+DIR=$(pwd)
+
+$DIR/build/ExtendedKF $DIR/data/laser-only-1.txt output/laser-only-out1.txt
+$DIR/build/ExtendedKF $DIR/data/radar-only-1.txt output/radar-only-2.txt
+
+$DIR/build/ExtendedKF $DIR/data/sample-laser-radar-measurement-data-1.txt output/out1.txt
+$DIR/build/ExtendedKF $DIR/data/sample-laser-radar-measurement-data-2.txt output/out2.txt

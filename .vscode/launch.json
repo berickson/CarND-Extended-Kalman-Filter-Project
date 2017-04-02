@@ -7,7 +7,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceRoot}/build/ExtendedKF",
-            "args": ["${workspaceRoot}/data/sample-laser-radar-measurement-data-1.txt","output/1.txt"],
+            "args": ["${workspaceRoot}/data/sample-laser-radar-measurement-data-2.txt","output/out2.txt"],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
             "environment": [],

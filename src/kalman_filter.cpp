@@ -60,7 +60,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   auto r =  sqrt(px*px+py*py);
   hx[0] =r;
   hx[1] = atan2(py,px);
-  hx[2] = (px*vx+py*vy)/r;
+  hx[2] = fabs(r)>0?(px*vx+py*vy)/r:0;
 
   VectorXd y = z - hx;
 

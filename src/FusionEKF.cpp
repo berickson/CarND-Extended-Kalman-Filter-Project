@@ -112,9 +112,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       - Time is measured in seconds.
      * Update the process noise covariance matrix.
      * Use noise_ax = 9 and noise_ay = 9 for your Q matrix.
-   */
+  **/
+
 	//compute the time elapsed between the current and previous measurements
-  const float noise_ax = 9; // bke: emperically, values of 5000 do a lot better
+  const float noise_ax = 9;
   const float noise_ay = 9;
 
   

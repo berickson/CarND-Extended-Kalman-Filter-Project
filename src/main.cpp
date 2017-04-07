@@ -89,6 +89,15 @@ int main(int argc, char* argv[]) {
       float y;
       iss >> x;
       iss >> y;
+
+      // safety based on review, reject measures at 0,0
+      // because they represent measure exactly at the sensor
+      // location and may cause math errors
+      if ( fabs(x) < 0.001 && fabs(y) < 0.001 )
+      {
+        x = 0.1;
+        y = 0.1;
+      }
       meas_package.raw_measurements_ << x, y;
       iss >> timestamp;
       meas_package.timestamp_ = timestamp;

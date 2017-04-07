@@ -87,12 +87,24 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       float phi = measurement_pack.raw_measurements_(1);
       float x = ro * cos(phi);
       float y = ro * sin(phi);
+      // based on review, reject 0,0
+      if ( fabs(x) < 0.001 && fabs(y) < 0.001 )
+      {
+        x = 0.1;
+        y = 0.1;
+      }
       ekf_.x_ << x, y, 0, 0;
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) {
       //set the state with the initial location and zero velocity
       float x = measurement_pack.raw_measurements_(0);
       float y = measurement_pack.raw_measurements_(1);
+      // based on review, reject 0,0
+      if ( fabs(x) < 0.001 && fabs(y) < 0.001 )
+      {
+        x = 0.1;
+        y = 0.1;
+      }
       ekf_.x_ << x, y, 0, 0;
     }
 

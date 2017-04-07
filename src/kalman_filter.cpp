@@ -56,9 +56,15 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   auto vx = x_(2);
   auto vy = x_(3);
 
+  // based on review, avoid update if the position
+  // may cause math errors
+  if ( px < 0.0001 && py < 0.0001 )
+    return; // abort the update
+
   auto hx = VectorXd(3);
   auto r =  sqrt(px*px+py*py);
   hx[0] =r;
+  
   hx[1] = atan2(py,px);
   hx[2] = fabs(r)>0?(px*vx+py*vy)/r:0;
 
@@ -71,8 +77,11 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   while(y(1)<-M_PI) {
     y(1) = y(1) + 2 * M_PI;
   }
-  MatrixXd S = H_ * P_ * H_.transpose() + R_;
-  MatrixXd K = P_ * H_.transpose() * S.inverse();
+
+  MatrixXd PHt = P_ * H_.transpose(); 
+  MatrixXd S = H_ * PHt + R_;
+  MatrixXd K = PHt * S.inverse();
+
   x_ = x_ + K * y;
   P_ = (I-K*H_)*P_;
 
